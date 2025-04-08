@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICF 분석 기반 행동 가이드 - 안규환 자산 포트폴리오 (Local Storage)</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+            line-height: 1.7;
+            margin: 0;
+            padding: 25px;
+        }
+        .container {
+            max-width: 950px;
+            margin: auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        h1, h2, h3, h4 {
+            color: #212529;
+            margin-top: 1.5em;
+            margin-bottom: 0.8em;
+            font-weight: 600;
+        }
+        h1 {
+            text-align: center;
+            color: #17a2b8; /* Info color */
+            margin-bottom: 1.2em;
+        }
+        h2 {
+            border-bottom: 2px solid #dee2e6;
+            padding-bottom: 0.4em;
+            color: #495057;
+        }
+        .section {
+            margin-bottom: 35px;
+            padding: 25px;
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+        }
+        .analysis-block {
+            background-color: #e2f0fb; /* Lighter blue */
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border-left: 4px solid #17a2b8;
+        }
+        .analysis-block strong {
+            color: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        table, th, td {
+            border: 1px solid #dee2e6;
+        }
+        th {
+            background-color: #e9ecef;
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #495057;
+        }
+        td {
+            padding: 12px 15px;
+            vertical-align: top;
+        }
+        ul {
+            padding-left: 20px;
+            margin-top: 0.5em;
+        }
+        li {
+            margin-bottom: 0.6em;
+        }
+        .action-guide-card {
+            background-color: #ffffff;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            padding: 20px 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 7px rgba(0, 0, 0, 0.07);
+            transition: box-shadow 0.3s ease;
+        }
+        .action-guide-card:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .action-guide-card h3 {
+            margin-top: 0;
+            color: #17a2b8;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5em;
+            font-size: 1.3em;
+        }
+        .action-guide-card h4 {
+            color: #6c757d;
+            font-size: 1.1em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            font-weight: 500;
+        }
+        .checklist li {
+            list-style: none;
+            margin-left: -20px; /* Adjust alignment */
+            padding: 6px 0;
+            display: flex; /* Align checkbox and label */
+            align-items: center;
+        }
+        .checklist label {
+            margin-left: 10px;
+            cursor: pointer;
+            user-select: none; /* Prevent text selection on double click */
+            flex-grow: 1; /* Allow label to take remaining space */
+        }
+        .checklist input[type="checkbox"] {
+            cursor: pointer;
+            margin-right: 5px;
+            flex-shrink: 0; /* Prevent checkbox from shrinking */
+            transform: scale(1.1); /* Slightly larger checkbox */
+        }
+        .local-storage-focus {
+            font-style: italic;
+            color: #5a6268;
+            font-size: 0.95em;
+            margin-top: 15px;
+            padding-left: 10px;
+            border-left: 3px solid #17a2b8;
+        }
+        .info-box {
+            background-color: #e7f3ff;
+            border-left: 5px solid #007bff;
+            padding: 15px 20px;
+            margin-top: 20px;
+            border-radius: 4px;
+        }
+         .info-box p, .info-box li {
+            margin-bottom: 0.8em;
+         }
+         .platform-module th { background-color: #d1ecf1; color: #0c5460; } /* Light blue for platform table */
+         .platform-module td { border-color: #bee5eb; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ICF 분석 기반 행동 가이드 시리즈</h1>
+        <p style="text-align:center; font-size: 1.1em; color: #6c757d; margin-bottom: 30px;">안규환 자산 포트폴리오 맞춤형 (Local Storage 실천형)</p>
+
+        <!-- Section 1: PDF 분석 및 경쟁력 발명 -->
+        <div class="section">
+            <h2>1. 분석 개요: ICF_GALLERY.pdf 및 포트폴리오 비교</h2>
+
+            <h3>1.1. 파일 요약 및 이슈 분류 (ICF_GALLERY.pdf)</h3>
+            <p>파일은 ICF 개념을 시각화하고 철학적으로 재해석한 'ICF 갤러리'로, 저자 강윤규 선생님의 경험과 철학을 통해 ICF를 설명합니다.</p>
+            <table>
+                <thead>
+                    <tr><th>이슈 분류</th><th>요약 내용</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>1. 철학과 인간 존재</td><td>인본주의, 자기 주도성, 건강/역사/조화 강조</td></tr>
+                    <tr><td>2. 건강 (Health)과 Functioning</td><td>건강의 가시화(Operationalize), 존재의 가치로서의 건강</td></tr>
+                    <tr><td>3. SMART 원칙</td><td>SMART (역사/인간/건강/조화/오늘) 재해석, 능동적 변화</td></tr>
+                    <tr><td>4. 장소와 시간의 철학</td><td>'지금, 여기'의 소중함, 구체적 장소 기반 이야기</td></tr>
+                    <tr><td>5. 예술로서의 의술</td><td>의료의 예술적 승화, 안전(SAFE) 철학</td></tr>
+                    <tr><td>6. 빅데이터와 건강 정보</td><td>데이터 가치 (V5), 질 좋은 데이터의 중요성</td></tr>
+                    <tr><td>7. Operationalization & Visualization</td><td>추상적 개념의 시각화 및 운영 가능화</td></tr>
+                    <tr><td>8. 가치와 질서의 공식</td><td>'A는 B다 / A는 B의 일부다' 사고 도구</td></tr>
+                </tbody>
+            </table>
+
+            <h3>1.2. 안규환 자산 포트폴리오 특징</h3>
+             <ul>
+                <li>자기 발견 및 자기 Operationalization 시스템</li>
+                <li>생성형 AI 활용 자기 주도 라이프 시스템</li>
+                <li>Functioning 기반 일상 관리 및 목표 실행</li>
+                <li>ICF/ICHI 기반 자기 관리와 데이터 활용</li>
+                <li>'질문-답변-운용' 순환 + Re:Asset Memory Loop</li>
+                <li>프로세스 자산 + MyAsset Navigator™ 개발</li>
+                <li>현장 중심 자산화 및 가치화 모델</li>
+                <li>Ensemble Generative AI Group 적용</li>
+                <li>로컬스토리지 기반 독립 운영 철학</li>
+            </ul>
+
+            <h3>1.3. 비교 분석 및 경쟁력 발명</h3>
+            <table>
+                <thead>
+                    <tr><th>이슈 분류</th><th>안규환 포트폴리오 비교</th><th>경쟁력 발명 포인트</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>철학과 인간 존재</td><td>"인간 중심 + AI 병렬 + 자가 발견형 시스템"</td><td>✅ 철학을 기술로 구현, AI 통한 초개인화 인본주의</td></tr>
+                    <tr><td>건강과 Functioning</td><td>ICF 기능 중심 운용, Re:Asset 연계</td><td>✅ Functioning 자산화/상품화 SaaS/PaaS 확장 가능성</td></tr>
+                    <tr><td>SMART 원칙</td><td>"오늘" 기준 루틴 발견 및 실행</td><td>✅ SMART 재해석: 'S'ystem + 'M'y + 'ART' (자산화 예술) 모델화</td></tr>
+                    <tr><td>장소와 시간</td><td>'지금 여기' 생활철학 구현 (고양, 워케이션)</td><td>✅ '장소 기반 자산화' 모델 (예: Goyang Prosumers)</td></tr>
+                    <tr><td>예술로서의 의술</td><td>"프로세스 자산" = 예술적 창조 행위</td><td>✅ 프로세스 자산을 "일상 예술화"로 확장</td></tr>
+                    <tr><td>빅데이터와 건강 정보</td><td>Ensemble AI, 로컬스토리지 활용</td><td>✅ "Small Personal Data" 중심 자기 데이터 주권 차별화</td></tr>
+                    <tr><td>Operationalization & Visualization</td><td>Re:Asset Loop + MyAsset Navigator™</td><td>✅ 이미 시각화/운용체계 구축, 글로벌 비즈니스 확장성</td></tr>
+                    <tr><td>가치와 질서의 공식</td><td>A is B / A is part of B → Asset Mapping 구조</td><td>✅ 자산 연결 지도화, 유연한 피봇 전략 경쟁력</td></tr>
+                </tbody>
+            </table>
+
+            <h3>1.4. 발견/발명된 경쟁력 요약</h3>
+            <ul>
+                <li><strong>초개인화 인본주의 실현:</strong> ICF 철학 + AI 구현 Self-System</li>
+                <li><strong>Functioning 자산화 SaaS 모델:</strong> Functioning 루틴 → 자산 → 시장 출시</li>
+                <li><strong>SMART 재해석 (Self & Art):</strong> System + My + ART (자산 창조 프로세스)</li>
+                <li><strong>장소 기반 순환 경제 모델:</strong> 로컬 prosumer → 글로벌 prosumer 확장</li>
+                <li><strong>프로세스 자산의 예술적 승화:</strong> "생활 예술" 브랜드 차별화</li>
+                <li><strong>퍼스널 데이터 주권 기반:</strong> Big Data → Small Personal Data 전략</li>
+                <li><strong>피봇 전략 지도화:</strong> 자산 네트워크형 구성 및 재조합</li>
+            </ul>
+            <p><strong>결론:</strong> 안규환 님 포트폴리오는 ICF 이론을 넘어, 실생활과 비즈니스에 접목 가능한 <strong>"Functioning 자산화"</strong>라는 유니크한 경쟁력을 지닌 <strong>"AI-Enabled Personal Functioning Asset Platform"</strong>으로 확장 가능합니다.</p>
+        </div>
+
+        <!-- Section 2: 행동 가이드 시리즈 (Local Storage 실천형) -->
+        <div class="section">
+            <h2>2. 행동 가이드 시리즈 (Local Storage 실천형)</h2>
+            <p>각 이슈를 안규환님의 자산화 철학에 맞춰 행동으로 연결하고, 체크리스트를 통해 실천하며 상태를 Local Storage에 저장합니다.</p>
+
+            <!-- Guide Card 1: 철학과 인간 존재 -->
+            <div class="action-guide-card" id="guide-philosophy">
+                <h3>1. 철학과 인간 존재</h3>
+                <h4>행동 철학: “AI-Enabled Self System으로 초개인화 인본주의 실현”</h4>
+                 <p>인간(나) 중심 사고 + 나의 데이터 + 나의 행동 → 나의 자산화. AI는 도구, 나는 주인공.</p>
+                <h4>행동 가이드 (체크리스트)</h4>
+                <ul class="checklist">
+                    <li><input type="checkbox" id="icf-chk1-1"><label for="icf-chk1-1">오늘 나의 존재 가치 질문 설정 (ex. 오늘 어떤 가치를 창출할 것인가?)</label></li>
+                    <li><input type="checkbox" id="icf-chk1-2"><label for="icf-chk1-2">하루 1회 나의 철학 메모장에 정리 (AI 사용 방향성 포함)</label></li>
+                    <li><input type="checkbox" id="icf-chk1-3"><label for="icf-chk1-3">주간 단위 철학 진전 사항 기록 및 저장</label></li>
+                </ul>
+                <p class="local-storage-focus"><strong>Local Storage Focus:</strong> 체크 상태 저장. 별도 기록 시 "철학_YYYYMMDD.txt" (질문/답변/느낀점/개선점)</p>
+            </div>
+
+            <!-- Guide Card 2: 건강과 Functioning -->
+            <div class="action-guide-card" id="guide-functioning">
+                <h3>2. 건강과 Functioning</h3>
+                <h4>행동 철학: “Functioning 자산화를 통한 SaaS/PaaS 모델 확장”</h4>
+                <p>건강과 기능은 삶의 가치 자산. Functioning = 현재 상태 기록 + 자산화 가능.</p>
+                <h4>행동 가이드 (체크리스트)</h4>
+                <ul class="checklist">
+                    <li><input type="checkbox" id="icf-chk2-1"><label for="icf-chk2-1">아침: 오늘의 건강 Functioning 지수 기록 (자기 평가)</label></li>
+                    <li><input type="checkbox" id="icf-chk2-2"><label for="icf-chk2-2">저녁: 하루 활동 Functioning 메모 (자산화 시나리오 포함)</label></li>
+                    <li><input type="checkbox" id="icf-chk2-3"><label for="icf-chk2-3">주간: 활동 Functioning → 자산화 가능성 평가 및 기록</label></li>
+                </ul>
+                 <p class="local-storage-focus"><strong>Local Storage Focus:</strong> 체크 상태 저장. 별도 기록 시 "Functioning_YYYYMMDD.txt" (건강지수/활동/메모/자산화 가능성)</p>
+            </div>
+
+            <!-- Guide Card 3: SMART 원칙 -->
+            <div class="action-guide-card" id="guide-smart">
+                <h3>3. SMART 원칙</h3>
+                <h4>행동 철학: “S.M.A.R.T → Self-My-Art (나의 시스템, 나의 예술)”</h4>
+                 <p>오늘 나의 시스템(System), 나의(My) 우선순위, 창의적 실행(Art), 현실화(Realization), 시간관리(Time)</p>
+                <h4>행동 가이드 (체크리스트)</h4>
+                <ul class="checklist">
+                    <li><input type="checkbox" id="icf-chk3-1"><label for="icf-chk3-1">S: 오늘의 시스템 개선 시도</label></li>
+                    <li><input type="checkbox" id="icf-chk3-2"><label for="icf-chk3-2">M: 나의(My) 우선순위 재조정</label></li>
+                    <li><input type="checkbox" id="icf-chk3-3"><label for="icf-chk3-3">A: 창의적(Art) 업무/일상 설계</label></li>
+                    <li><input type="checkbox" id="icf-chk3-4"><label for="icf-chk3-4">R: 현실화(Realization) 가능성 검토</label></li>
+                    <li><input type="checkbox" id="icf-chk3-5"><label for="icf-chk3-5">T: 시간 관리(Time Management) 점검</label></li>
+                </ul>
+                 <p class="local-storage-focus"><strong>Local Storage Focus:</strong> 체크 상태 저장. 별도 기록 시 "SMART_YYYYMMDD.txt" (S/M/A/R/T 점검/결과/개선점)</p>
+            </div>
+
+            <!-- Guide Card 4: 장소와 시간 -->
+             <div class="action-guide-card" id="guide-placetime">
+                <h3>4. 장소와 시간</h3>
+                <h4>행동 철학: “장소 기반 순환 경제 모델 + 시간 자산화”</h4>
+                <p>장소와 시간 = 자산. '지금 여기'에서 기회 발견.</p>
+                <h4>행동 가이드 (체크리스트)</h4>
+                <ul class="checklist">
+                    <li><input type="checkbox" id="icf-chk4-1"><label for="icf-chk4-1">매일 위치 및 활동 장소 기록</label></li>
+                    <li><input type="checkbox" id="icf-chk4-2"><label for="icf-chk4-2">매일 '지금 이 순간' 느낀 점/아이디어 기록</label></li>
+                    <li><input type="checkbox" id="icf-chk4-3"><label for="icf-chk4-3">월간: 장소 기반 자산화 아이디어 정리</label></li>
+                </ul>
+                 <p class="local-storage-focus"><strong>Local Storage Focus:</strong> 체크 상태 저장. 별도 기록 시 "PlaceTime_YYYYMMDD.txt" (위치/활동/느낀점/자산화 아이디어)</p>
+            </div>
+
+            <!-- Guide Card 5: 예술로서의 의술 -->
+             <div class="action-guide-card" id="guide-artinprocess">
+                <h3>5. 예술로서의 의술</h3>
+                <h4>행동 철학: “프로세스 자산 = 일상 예술”</h4>
+                 <p>일상은 나의 예술, 과정 자체가 자산.</p>
+                <h4>행동 가이드 (체크리스트)</h4>
+                <ul class="checklist">
+                    <li><input type="checkbox" id="icf-chk5-1"><label for="icf-chk5-1">오늘 하나의 행동을 '예술 행위'로 선언하고 실행</label></li>
+                    <li><input type="checkbox" id="icf-chk5-2"><label for="icf-chk5-2">실행 후 감상 및 과정 기록</label></li>
+                    <li><input type="checkbox" id="icf-chk5-3"><label for="icf-chk5-3">주간 단위 '일상의 예술' 발견 리뷰</label></li>
+                </ul>
+                <p class="local-storage-focus"><strong>Local Storage Focus:</strong> 체크 상태 저장. 별도 기록 시 "ArtInProcess_YYYYMMDD.txt" (예술행위 선언/실행/느낀점/개선)</p>
+            </div>
+
+            <!-- Guide Card 6: 빅데이터와 건강 정보 -->
+             <div class="action-guide-card" id="guide-personaldata">
+                <h3>6. 빅데이터와 건강 정보</h3>
+                <h4>행동 철학: “Big Data → Small Personal Data 전략”</h4>
+                <p>개인 데이터의 품질을 높여 자산화. 나의 데이터 주권 확보.</p>
+                <h4>행동 가이드 (체크리스트)</h4>
+                <ul class="checklist">
+                    <li><input type="checkbox" id="icf-chk6-1"><label for="icf-chk6-1">매일 1개 이상의 자기 데이터(건강/생활/업무) 의도적 수집</label></li>
+                    <li><input type="checkbox" id="icf-chk6-2"><label for="icf-chk6-2">주간: 수집 데이터 리뷰 및 인사이트 도출</label></li>
+                    <li><input type="checkbox" id="icf-chk6-3"><label for="icf-chk6-3">자산화 시나리오로 발전시키기</label></li>
+                </ul>
+                 <p class="local-storage-focus"><strong>Local Storage Focus:</strong> 체크 상태 저장. 별도 기록 시 "PersonalData_YYYYMMDD.txt" (데이터 항목/수집시간/인사이트/활용계획)</p>
+            </div>
+
+            <!-- Guide Card 7: Operationalization & Visualization -->
+            <div class="action-guide-card" id="guide-visualization">
+                <h3>7. Operationalization & Visualization</h3>
+                <h4>행동 철학: “Re:Asset Memory Loop + MyAsset Navigator™ 활용”</h4>
+                <p>개념을 실행하고 시각화하여 내 자산으로 만든다.</p>
+                <h4>행동 가이드 (체크리스트)</h4>
+                <ul class="checklist">
+                    <li><input type="checkbox" id="icf-chk7-1"><label for="icf-chk7-1">오늘의 개념 또는 인사이트를 시각화 시도 (마인드맵, 도식화 등)</label></li>
+                    <li><input type="checkbox" id="icf-chk7-2"><label for="icf-chk7-2">관련 자산을 MyAsset Navigator™에 연결/업데이트</label></li>
+                    <li><input type="checkbox" id="icf-chk7-3"><label for="icf-chk7-3">실행 가능성 및 다음 단계 정의</label></li>
+                </ul>
+                 <p class="local-storage-focus"><strong>Local Storage Focus:</strong> 체크 상태 저장. 별도 기록 시 "Visualization_YYYYMMDD.txt" (개념/시각화도구/실행시나리오/Navigator업데이트)</p>
+            </div>
+
+            <!-- Guide Card 8: 가치와 질서의 공식 -->
+            <div class="action-guide-card" id="guide-assetmap">
+                <h3>8. 가치와 질서의 공식</h3>
+                <h4>행동 철학: “A is B or A is part of B 사고법 → 자산 지도화”</h4>
+                <p>자산의 연결성을 파악하고 재조합하여 피봇한다.</p>
+                <h4>행동 가이드 (체크리스트)</h4>
+                <ul class="checklist">
+                    <li><input type="checkbox" id="icf-chk8-1"><label for="icf-chk8-1">매일 자산 관계성 (A-B) 메모 또는 시각화</label></li>
+                    <li><input type="checkbox" id="icf-chk8-2"><label for="icf-chk8-2">주간: 발견된 관계 기반 피봇 가능성 검토 및 전략화</label></li>
+                    <li><input type="checkbox" id="icf-chk8-3"><label for="icf-chk8-3">전략 노트를 관련 자산과 연결하여 저장</label></li>
+                </ul>
+                <p class="local-storage-focus"><strong>Local Storage Focus:</strong> 체크 상태 저장. 별도 기록 시 "AssetMap_YYYYMMDD.txt" (A-B관계/피봇가능성/전략노트)</p>
+            </div>
+        </div>
+
+        <!-- Section 3: 플랫폼 연동 및 확장 설계 -->
+        <div class="section">
+            <h2>3. 자산 플랫폼 연동 및 확장 설계</h2>
+            <p>이 행동 가이드 시리즈는 안규환님의 <strong>MyAsset Navigator™ + Re:Asset Memory Loop™ Platform</strong>과 연동될 때 강력한 시너지를 발휘하며, 완전한 자산화 생태계로 발전할 수 있습니다.</p>
+
+            <h3>3.1. 플랫폼 연동 시나리오</h3>
+            <ol>
+                <li><strong>Local Storage → 플랫폼 동기화:</strong> 행동 기록(체크 상태, 별도 txt 메모)을 "Re:Asset Sync Engine"을 통해 플랫폼에 자동 업로드 및 분석 (로컬 우선 + 선택적 클라우드).</li>
+                <li><strong>AI 분석 및 자산화:</strong> 업로드된 데이터를 AI가 분석하여 자산 후보 발굴, 피봇팅 시나리오 매핑, 실시간 자산 시각화.</li>
+                <li><strong>마켓플레이스 연동:</strong> 개인화된 자산(나의 자산 → 팀 자산 → 외부 거래)을 마켓플레이스에 노출.</li>
+                <li><strong>팀/프랜차이즈 확장:</strong> 팀원들이 동일 시스템 사용, 플랫폼에서 팀 자산 합산/분석 ("TeamGPT" 기능), 프랜차이즈 버전 라이선싱.</li>
+            </ol>
+
+            <h3>3.2. 기능별 플랫폼 모듈 설계</h3>
+            <table class="platform-module">
+                <thead>
+                    <tr><th>기능</th><th>설명</th><th>안규환 포트폴리오 연계</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>📝 행동 기록 자동화</td><td>Local Storage 연동 자동화</td><td>로컬 데이터 주권 철학</td></tr>
+                    <tr><td>📊 데이터 시각화</td><td>매일/주간/월간 자산 맵핑</td><td>Re:Asset Memory Loop™</td></tr>
+                    <tr><td>🧩 자산 Mapping & 피봇팅</td><td>A-B 관계 정리 및 피봇 전략 생성</td><td>Asset Mapping 전략</td></tr>
+                    <tr><td>🔄 Re:Asset Loop 자동화</td><td>자산 순환 구조 구축</td><td>Re:Asset Memory Loop™</td></tr>
+                    <tr><td>🌐 Marketplace 연동</td><td>팀/개인 자산화 상품 거래</td><td>프랜차이즈 + 글로벌 확장</td></tr>
+                    <tr><td>🧑‍🤝‍🧑 Team GPT 운영</td><td>팀 단위 자산화 및 협업</td><td>ChatGPT Teams 모델</td></tr>
+                    <tr><td>🚀 Growth Dashboard</td><td>KPI 및 성장 지표 시각화</td><td>자가 관리 + 확장성</td></tr>
+                </tbody>
+            </table>
+
+             <h3>3.3. 플랫폼 확장 전략</h3>
+             <ul>
+                 <li><strong>A. 개인 사용자 단계:</strong> 일일 기록(Local Storage) → MyAsset Navigator™ 자동 분석 → 자산화 후보 도출</li>
+                 <li><strong>B. 팀 기반 협업 단계:</strong> 팀원 Local Storage 집합 → TeamGPT & Re:Asset Loop™ 활용 → 팀 자산 Pooling 및 공동 가치 생성</li>
+                 <li><strong>C. 프랜차이즈/글로벌 단계:</strong> 팀 단위 라이선스 → 워크숍/OKR/교육 패키지 상품화 → 글로벌 프로슈머 대상 SaaS/PaaS 확장</li>
+             </ul>
+
+            <div class="info-box">
+                <h4>플랫폼의 차별성 및 경쟁력:</h4>
+                <ul>
+                    <li><strong>로컬스토리지 우선:</strong> 개인정보 보호 및 독립성 강화</li>
+                    <li><strong>AI 보조형 시스템:</strong> AI를 병렬적 동반자로 활용</li>
+                    <li><strong>프로세스 자산화:</strong> 행동 자체가 자산으로 축적되는 구조</li>
+                    <li><strong>Ensemble AI 활용:</strong> 다양한 AI 엔진 연동 유연성</li>
+                    <li><strong>질문 기반 가치 생성:</strong> 질문-답변-자산화 루프 내재화</li>
+                    <li><strong>지역 순환 모델 지원:</strong> 지역 기반 팀/프랜차이즈 확장 용이</li>
+                </ul>
+                <p><strong>결론:</strong> 이 플랫폼은 단순 데이터 저장을 넘어, <strong>행동 → 기록 → 자산화 → 시장화 → 팀/프랜차이즈 확장 → 글로벌 진출</strong>까지 이어지는 완전한 자산화 생태계를 구축할 수 있습니다.</p>
+            </div>
+
+            <h3>3.4. 제안하는 다음 단계</h3>
+            <ul>
+                <li>플랫폼 MVP(Minimum Viable Product) 화면 설계 (Wireframe/Flowchart)</li>
+                <li>자동화 연동 프로토콜 설계 (Local Storage ↔ 플랫폼)</li>
+                <li>TeamGPT 및 프랜차이즈 모델 상세 설계</li>
+                <li>초기 운영 계획 및 월간 KPI 정의</li>
+            </ul>
+        </div>
+
+    </div> <!-- /.container -->
+
+    <script>
+        // Local Storage 기반 체크리스트 상태 저장 및 로드
+        document.addEventListener('DOMContentLoaded', () => {
+            const checkboxes = document.querySelectorAll('.checklist input[type="checkbox"]');
+
+            // 페이지 로드 시 Local Storage에서 상태 불러오기
+            checkboxes.forEach(checkbox => {
+                const storedState = localStorage.getItem(checkbox.id);
+                if (storedState === 'true') {
+                    checkbox.checked = true;
+                } else { // null 또는 'false'일 경우
+                    checkbox.checked = false;
+                }
+
+                // 체크박스 변경 시 Local Storage에 상태 저장
+                checkbox.addEventListener('change', (event) => {
+                    localStorage.setItem(event.target.id, event.target.checked);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
